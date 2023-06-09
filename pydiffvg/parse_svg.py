@@ -536,7 +536,10 @@ def parse_scene(node):
     fill_color = torch.tensor([0.0, 0.0, 0.0, 1.0])
     transform = torch.eye(3)
     if 'viewBox' in node.attrib:
+        view_box_array_comma = node.attrib['viewBox'].split(',')
         view_box_array = node.attrib['viewBox'].split()
+        if len(view_box_array) < len(view_box_array_comma):
+            view_box_array = view_box_array_comma
         canvas_width = parse_int(view_box_array[2])
         canvas_height = parse_int(view_box_array[3])
     else:
